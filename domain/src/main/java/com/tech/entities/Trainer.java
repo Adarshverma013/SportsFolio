@@ -23,6 +23,10 @@ public class Trainer {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users userId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sports_id", referencedColumnName = "id")
+    private Sports sports;
+
     @Column(name = "certificate_url")
     private String certificateUrl;
 
@@ -38,8 +42,6 @@ public class Trainer {
     @Column(name = "availability")
     private String availability;
 
-    @Column(name = "sports_name")
-    private Long sportsName;
 
 
 }

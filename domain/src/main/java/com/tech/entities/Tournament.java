@@ -28,6 +28,10 @@ public class Tournament {
     @JoinColumn(name = "organizer_id" , referencedColumnName = "id")
     private Users organizerId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sports_id" , referencedColumnName = "id")
+    private Sports sports;
+
     @Column(name = "name")
     private String name;
 
@@ -44,6 +48,5 @@ public class Tournament {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "sports_name")
-    private String sportsName;
+
 }
