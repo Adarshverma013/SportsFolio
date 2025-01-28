@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,19 +28,22 @@ public class Tournament {
     @JoinColumn(name = "organizer_id" , referencedColumnName = "id")
     private Users organizerId;
 
-
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "type")
     private String type;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    @Column(name = "sports_id")
-    private Long sportsId;
+    @Column(name = "sports_name")
+    private String sportsName;
 }

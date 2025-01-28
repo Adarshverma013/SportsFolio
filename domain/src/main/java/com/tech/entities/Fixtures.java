@@ -1,12 +1,13 @@
 package com.tech.entities;
 
+import com.tech.enums.GameStage;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,20 +27,22 @@ public class Fixtures {
     private Tournament tournamentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participant_1_id" , referencedColumnName = "id")
-    private Tournament_Participant participant1Id;
+    @JoinColumn(name = "first_participant_id" , referencedColumnName = "id")
+    private TournamentParticipant firstParticipantId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participant_2_id" , referencedColumnName = "id")
-    private Tournament_Participant participant2Id;
+    @JoinColumn(name = "second_participant_id" , referencedColumnName = "id")
+    private TournamentParticipant secondParticipantId;
 
-    private Integer round;
+    @Column(name = "round")
+    @Enumerated(EnumType.STRING)
+    private GameStage round;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "winner_id" , referencedColumnName = "id")
-    private Tournament_Participant winnerId;
+    private TournamentParticipant winnerId;
 
     @Column(name = "match_date")
-    private Timestamp matchDate;
+    private LocalDate matchDate;
 
 }

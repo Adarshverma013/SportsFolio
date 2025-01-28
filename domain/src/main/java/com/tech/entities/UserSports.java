@@ -1,5 +1,6 @@
 package com.tech.entities;
 
+import com.tech.enums.Level;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,26 +16,29 @@ import java.time.LocalDateTime;
 @Setter
 
 @Entity
-@Table(name = "endorsement")
-public class Endorsement {
+@Table(name = "user_sports")
+public class UserSports {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "endorser_id" , referencedColumnName = "id")
-    private Users endorserId;
+    @JoinColumn(name = "user_id" , referencedColumnName = "id")
+    private Users user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "endorsed_id" , referencedColumnName = "id")
-    private Users endorsedId;
+    @JoinColumn(name = "sports_id" , referencedColumnName = "id")
+    private Sports sports;
 
-    @Column(name = "badge")
-    private String badge;
+    @Column(name = "experience_years")
+    private Integer experienceYears;
 
-    @Column(name = "message")
-    private String message;
+    @Column(name = "level")
+    private Level level;
+
+    @Column(name = "is_primary")
+    private Boolean isPrimary;
 
     @Column(name = "created_at")
     @CreationTimestamp

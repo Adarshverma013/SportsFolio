@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +24,10 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserSports> userSports;
+
+    @Column(name = "name")
     private String name;
 
     @Column(name = "email_id")
@@ -29,22 +36,21 @@ public class Users {
     @Column(name = "password_hash")
     private String passwordHash;
 
+    @Column(name = "bio")
     private String bio;
 
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    @Column(name = "primary_sport")
-    private Sports primarySport;
-
     @Column(name = "is_trainer")
     private Boolean isTrainer;
 
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(name = "user_role")
     private String userRole;

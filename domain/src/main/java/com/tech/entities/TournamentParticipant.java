@@ -13,7 +13,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tournament_participant")
-public class Tournament_Participant {
+public class TournamentParticipant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

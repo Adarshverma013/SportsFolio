@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,17 +23,15 @@ public class Sports {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id" , referencedColumnName = "id")
-    private Users userId;
+    @OneToMany(mappedBy = "sports", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserSports> userSports;
 
+    @Column(name = "name")
     private String name;
-    private String level;
 
-    @Column(name = "experience_years")
-    private Integer experienceYears;
 
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
