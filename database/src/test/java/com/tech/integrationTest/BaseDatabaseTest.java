@@ -1,7 +1,6 @@
 package com.tech.integrationTest;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
@@ -16,7 +15,6 @@ import java.sql.SQLException;
 
 @SpringBootTest // Loads the full Spring context for testing
 @ContextConfiguration(classes = TestConfig.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS) // Runs @BeforeAll once per test class
 @ActiveProfiles("test") // Uses application-test.properties
 public class BaseDatabaseTest {
     @Autowired
@@ -25,7 +23,7 @@ public class BaseDatabaseTest {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
-    @BeforeAll
+    @BeforeEach
     void setupDatabase() throws SQLException {
         // Load schema and initial data
         loadSQLFile("sql/clearDb.sql"); // clear db
